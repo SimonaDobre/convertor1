@@ -48,13 +48,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   String? errorMessage;
   double? amountStringConvertedToDouble;
   double? amountConvertedToRON = 0;
   String amountDoubleDigit = '';
-  var myController = TextEditingController();
-
+  TextEditingController myController = TextEditingController();
 
   void convertToRon() {
     setState(() {
@@ -63,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      if (errorMessage == null){
+      if (errorMessage == null) {
         amountStringConvertedToDouble = double.parse(myController.text);
         amountConvertedToRON = amountStringConvertedToDouble! * 5;
         amountDoubleDigit = amountConvertedToRON!.toStringAsFixed(2);
@@ -71,16 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
-  void showProperErrorMessage(String x){
+  void showProperErrorMessage(String x) {
     setState(() {
       amountStringConvertedToDouble = double.tryParse(x);
-      if ((x.length <= 5 && amountStringConvertedToDouble == null)
-          || (x.length > 5 && amountStringConvertedToDouble == null) ){
-          errorMessage = 'please enter a valid amount';
-      } else if (x.length < 5){
+      if ((x.length <= 5 && amountStringConvertedToDouble == null) ||
+          (x.length > 5 && amountStringConvertedToDouble == null)) {
+        errorMessage = 'please enter a valid amount';
+      } else if (x.length < 5) {
         errorMessage = 'please enter minimum 5 digits';
-      }  else {
+      } else {
         errorMessage = null;
       }
     });
@@ -101,90 +98,63 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20),
         child: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Image(image: AssetImage('imagini/money2.jpeg')),
+              const Image(image: AssetImage('imagini/money2.jpeg')),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: TextFormField(
-                  controller: myController,
-                  style: TextStyle(
-                    fontSize: 20
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Please enter the amount',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(20)
-                      )
-                    ),
-                      errorStyle: TextStyle(),
-                      errorText: errorMessage,
-                    suffixIcon: IconButton(
-                        onPressed: (){
-                          myController.clear();
-                          setState(() {
-                            amountDoubleDigit = '';
-                          });
-                        },
-                        icon: Icon(Icons.clear))
-                  ),
-                  keyboardType: TextInputType.number ,
-                  onChanged: (String orice) {
-                     showProperErrorMessage(myController.text);
-                  }
-                ),
+                    controller: myController,
+                    style: const TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        hintText: 'Please enter the amount',
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide(width: 2),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20)),),
+                        errorStyle: const TextStyle(),
+                        errorText: errorMessage,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              myController.clear();
+                              setState(() {
+                                amountDoubleDigit = '';
+                              });
+                            },
+                            icon: const Icon(Icons.clear),),),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String orice) {
+                      showProperErrorMessage(myController.text);
+                    },),
               ),
               ElevatedButton(
-                child: Text(
+                  child: const Text(
                     'Convert to RON',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ),
-                onPressed: (){
-                  convertToRon();
-                } ),
+                  onPressed: () {
+                    convertToRon();
+                  },),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10),
                 child: Text(
-                   amountDoubleDigit + ' RON',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                  ),
+                  '$amountDoubleDigit RON',
+                  style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
         ),
       ),
-    //  floatingActionButton: FloatingActionButton(
-     //   onPressed: _incrementCounter,
-     //   tooltip: 'Increment',
-    //    child: const Icon(Icons.add),
-     // ), // This trailing comma makes auto-formatting nicer for build methods.
+      //  floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //    child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
