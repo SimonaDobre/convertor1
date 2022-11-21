@@ -108,42 +108,47 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextFormField(
-                    controller: myController,
-                    style: const TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
-                        hintText: 'Please enter the amount',
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20)),),
-                        errorStyle: const TextStyle(),
-                        errorText: errorMessage,
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              myController.clear();
-                              setState(() {
-                                amountDoubleDigit = '';
-                              });
-                            },
-                            icon: const Icon(Icons.clear),),),
-                    keyboardType: TextInputType.number,
-                    onChanged: (String orice) {
-                      showProperErrorMessage(myController.text);
-                    },),
+                  controller: myController,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    hintText: 'Please enter the amount',
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    errorStyle: const TextStyle(),
+                    errorText: errorMessage,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        myController.clear();
+                        setState(() {
+                          amountDoubleDigit = '';
+                        });
+                      },
+                      icon: const Icon(Icons.clear),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (String orice) {
+                    showProperErrorMessage(myController.text);
+                  },
+                ),
               ),
               ElevatedButton(
-                  child: const Text(
-                    'Convert to RON',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: () {
-                    convertToRon();
-                  },),
+                child: const Text(
+                  'Convert to RON',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  convertToRon();
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
                   '$amountDoubleDigit RON',
-                  style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
